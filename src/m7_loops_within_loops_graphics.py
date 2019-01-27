@@ -102,7 +102,47 @@ def hourglass(window, n, point, radius, color):
     #    DIFFICULTY:      8
     #    TIME ESTIMATE:  25 minutes (warning: this problem is challenging)
     # -------------------------------------------------------------------------
+    # c=rg.Circle(point,radius)
+    # c.attach_to(window)
+    # window.render()
+    # print(radius)
+    # print(point.x)
+    # l1 = rg.Line(rg.Point(200 - radius, point.y), rg.Point(200+ radius, point.y))
+    # l1.color='black'
+    # l1.thickness=20
+    # # p.attach_to(window)
+    # l1.attach_to(window)
+    import math
 
+    x1= point.x
+    y1= point.y
+    x2=point.x
+    y2=point.y
+    for k in range (n):
+        for j in range (k+1):
+           p1=rg.Point(x1+2*radius*j,y1)
+           c1=rg.Circle(p1,radius)
+           c1.fill_color=color
+           l1=rg.Line(rg.Point(p1.x-radius,p1.y),rg.Point(p1.x+radius,p1.y))
+           # l1=rg.Line(rg.Point(1,2),rg.Point(100,200))
+           l1.color='black'
+           l1.thickness=5
+           l1.attach_to(window)
+           c1.attach_to(window)
+        x1=x1-radius
+        y1=y1-math.sqrt(3)*radius
+        for h in range (k+1):
+           p2=rg.Point(x2+2*radius*h,y2)
+           c2=rg.Circle(p2,radius)
+           l2 = rg.Line(rg.Point(c2.center.x - radius, c2.center.y), rg.Point(c2.center.x + radius, c2.center.y))
+           l2.color = 'black'
+           l2.thickness = 5
+           c2.fill_color=color
+           l2.attach_to(window)
+           c2.attach_to(window)
+        x2=x2-radius
+        y2=y2+math.sqrt(3)*radius
+    window.render()
 
 def run_test_many_hourglasses():
     """ Tests the    many_hourglasses    function. """
